@@ -44,4 +44,3 @@ _This script starts a webpack dev server. The app url is depends on your .env fi
 ### Chapter 5: Trigger Actions From Your Component
 - How does `mapDispatch` work?
 - How do I map my actions to react props?
-- 
