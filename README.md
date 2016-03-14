@@ -1,6 +1,8 @@
 # Redux Calculator
 > Learn how to manage the state of your react component using redux.
 
+![calc image](https://github.com/ksespinola/react-redux-calculator/blob/master/src/assets/images/calculator.png?raw=true)
+
 ## Getting Started
 1. Create .env
 ```
