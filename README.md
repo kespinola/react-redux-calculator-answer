@@ -26,17 +26,17 @@ _This script starts a webpack dev server. The app url is depends on your .env fi
 - How does the store manage the application state?
 - How do I create a store?
 
-### Chapter : Updating Your Application State
+### Chapter 2: Updating Your Application State
 - What is a reducer?
 - How do I a create a reducer?
 - How do I register a reducer with the store?
 - How do libraries like `reduxify` and `react-actions` help?
 
-### Chapter : A look at `react-redux`
+### Chapter 3: A look at `react-redux`
 - How do I connect my store to react?
 - How does `connect(selector, mapDispatch)(Component)` expose your store to the component?
 
-### Chapter : Display State of The Application
+### Chapter 4: Display State of The Application
 - What is `reselect`?
 - How do I create a selector?
 - How do components consume selectors?
