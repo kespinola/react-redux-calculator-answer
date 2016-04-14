@@ -1,5 +1,6 @@
 import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import AutoPrefixCore from 'autoprefixer-core';
+import Rebeccapurple from 'postcss-color-rebeccapurple';
 import { join } from 'path';
 
 const { HOST, PORT } = process.env;
@@ -31,15 +32,12 @@ export default {
         exclude: /node_modules/,
       },
       {
-        test: [/\.sass$/, /\.scss$/],
-        loader: ExtractTextPlugin.extract(
+        test: [/\.css$/],
+        loaders: [
           'style',
-          'css?browsers=last 2 versions!sass'
-        ),
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css'),
+          'css?modules&importLoaders=1',
+          'postcss',
+        ],
       },
       {
         test: /\.json$/,
@@ -56,8 +54,13 @@ export default {
     ],
   },
 
+  postcss: [
+    AutoPrefixCore,
+    Rebeccapurple,
+  ],
+
   resolve: {
-    modulesDirectories: [
+    modules: [
       'node_modules',
     ],
 
@@ -70,7 +73,6 @@ export default {
   },
 
   plugins: [
-    new ExtractTextPlugin('bundle.css', { allChunks: true }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
   ],

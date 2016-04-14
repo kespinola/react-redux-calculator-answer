@@ -9,8 +9,6 @@ const compiler = webpack(config);
 console.info('Starting development server. Please wait...');
 
 const server = new WebpackDevServer(compiler, {
-  // Configure hot replacement
-  hot: true,
 
   // The rest is terminal configurations
   quiet: false,
