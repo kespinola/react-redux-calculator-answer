@@ -1,6 +1,8 @@
 import webpack from 'webpack';
 import AutoPrefixCore from 'autoprefixer-core';
 import Rebeccapurple from 'postcss-color-rebeccapurple';
+import SimpleVariables from 'postcss-simple-vars';
+import NextCSS from 'postcss-cssnext';
 import { join } from 'path';
 
 const { HOST, PORT } = process.env;
@@ -57,6 +59,8 @@ export default {
   postcss: [
     AutoPrefixCore,
     Rebeccapurple,
+    SimpleVariables,
+    NextCSS,
   ],
 
   resolve: {
