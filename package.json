@@ -56,8 +56,10 @@
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
     "postcss-cssnext": "^2.5.2",
+    "ramda": "^0.21.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-redux": "^4.4.5",
     "redux": "^3.4.0"
   }
 }
