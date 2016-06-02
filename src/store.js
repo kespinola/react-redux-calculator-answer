@@ -1,10 +1,18 @@
 import { createStore } from 'redux';
-import { compose, ifElse } from 'ramda';
+import { compose, ifElse, add, multiply, subtract, divide } from 'ramda';
+
+const SUPPORTED_OPERATIONS = {
+  '+': add,
+  '*': multiply,
+  '-': subtract,
+  '/': divide,
+};
 
 // Actions Constants
 const INCREMENT_VALUE = 'calculator/INCREMENT_VALUE';
 const INCREMENT_CHANGE = 'calculator/INCREMENT_CHANGE';
 const CHANGE_OPERATOR = 'calculator/CHANGE_OPERATOR';
+const CALCULATE_EQUATION = 'calculator/CALCULATE_EQUATION';
 
 // Actions Creators
 export const incrementValue = change => ({
@@ -21,6 +29,8 @@ export const incrementChange = change => ({
   type: INCREMENT_CHANGE,
   payload: change,
 });
+
+export const calculateEquation = () => ({ type: CALCULATE_EQUATION });
 
 // State Updaters
 const isValidUpdate = ({ prev, update }) => {
@@ -39,6 +49,13 @@ const updateField = ifElse(
   changeField,
   () => ''
 );
+
+const handleCalculate = ({ value, change, operator }) => {
+  const valueFloat = parseFloat(value);
+  const changeFloat = parseFloat(change);
+  const nextValue = SUPPORTED_OPERATIONS[operator](valueFloat, changeFloat);
+  return String(nextValue);
+};
 
 export const reducer = (state = {}, { type, payload }) => {
   switch (type) {
@@ -62,6 +79,12 @@ export const reducer = (state = {}, { type, payload }) => {
     return {
       ...state,
       operator: payload,
+    }
+    case CALCULATE_EQUATION:
+    return {
+      value: handleCalculate(state),
+      change: null,
+      operator: null,
     }
     default:
       return state;
