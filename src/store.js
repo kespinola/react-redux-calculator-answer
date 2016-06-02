@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createLogger from 'redux-logger';
 import { compose, ifElse, add, multiply, subtract, divide } from 'ramda';
 
 const SUPPORTED_OPERATIONS = {
@@ -57,6 +58,7 @@ const handleCalculate = ({ value, change, operator }) => {
   return String(nextValue);
 };
 
+// Store reducer
 export const reducer = (state = {}, { type, payload }) => {
   switch (type) {
     case INCREMENT_VALUE:
@@ -91,4 +93,11 @@ export const reducer = (state = {}, { type, payload }) => {
   }
 };
 
-export default createStore(reducer, {});
+// Redux Middleware
+const logger = createLogger({ collapsed: true });
+
+export default createStore(
+  reducer,
+  {},
+  applyMiddleware(logger)
+);
