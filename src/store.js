@@ -3,6 +3,7 @@ import { compose, ifElse } from 'ramda';
 
 // Actions Constants
 const INCREMENT_VALUE = 'calculator/INCREMENT_VALUE';
+const INCREMENT_CHANGE = 'calculator/INCREMENT_CHANGE';
 const CHANGE_OPERATOR = 'calculator/CHANGE_OPERATOR';
 
 // Actions Creators
@@ -14,6 +15,11 @@ export const incrementValue = change => ({
 export const changeOperator = operator => ({
   type: CHANGE_OPERATOR,
   payload: operator,
+});
+
+export const incrementChange = change => ({
+  type: INCREMENT_CHANGE,
+  payload: change,
 });
 
 // State Updaters
@@ -37,13 +43,20 @@ const updateField = ifElse(
 export const reducer = (state = {}, { type, payload }) => {
   switch (type) {
     case INCREMENT_VALUE:
-      const change = {
-        prev: state.value,
-        update: payload,
-      };
       return {
         ...state,
-        value: updateField(change),
+        value: updateField({
+          prev: state.value,
+          update: payload,
+        }),
+      }
+    case INCREMENT_CHANGE:
+      return {
+        ...state,
+        change: updateField({
+          prev: state.change,
+          update: payload,
+        }),
       }
     case CHANGE_OPERATOR:
     return {

@@ -1,6 +1,11 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import store, { reducer, incrementValue, changeOperator } from './../src/store';
+import store, {
+  reducer,
+  incrementValue,
+  changeOperator,
+  incrementChange,
+} from './../src/store';
 
 describe('Calculator State Management', () => {
   it('sets initial state to empty object', () => {
@@ -36,6 +41,17 @@ describe('Calculator State Management', () => {
     it('overrides previous operator with *', () => {
       const nextState = reducer({ operator: '+' }, changeOperator('-'));
       expect(nextState).to.eql({ operator: '-' });
+    });
+  });
+  describe('INCREMENT_CHANGE', () => {
+    const initState = { change: '4', value: '22' };
+    const nextState = reducer(initState, incrementChange('7'));
+    const expectedState = { ...initState, change: '47' };
+    it('increments to 4 when current is 47', () => {
+      expect(nextState).to.eql(expectedState);
+    });
+    it('does not effect value when changed', () => {
+      expect(nextState).to.eql(expectedState);
     });
   });
 });
