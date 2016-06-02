@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import styles from './calculator.css';
 import Key from './../Key';
 
-const Calculator = ({ incrementDisplay, changeOperator, display }) => {
+const Calculator = ({ incrementDisplay, changeOperator, display, calculateResult }) => {
   return (
       <article className={styles.wrapper}>
         <input className={styles.input} readOnly value={display} />
@@ -22,7 +22,7 @@ const Calculator = ({ incrementDisplay, changeOperator, display }) => {
           <Key onClick={incrementDisplay} value="3" />
           <Key onClick={changeOperator} value="-" />
           <div className={styles.equal_key_wrap}>
-            <Key type="equal_key" value="=" />
+            <Key onClick={calculateResult} type="equal_key" value="=" />
           </div>
           <Key onClick={incrementDisplay} value="0" />
           <Key onClick={incrementDisplay} value="." />

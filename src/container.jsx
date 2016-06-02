@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
 import {
   calculateEquation,
   changeOperator,
@@ -20,21 +21,32 @@ const calculatorSelector = ({ value, change, operator }) => ({
   operator,
 });
 
-const calculatorMergeProps = (
-  stateProps,
-  { incrementValue, incrementChange, ...dispatch },
-  ownProps
-) => ({
-  ...stateProps,
-  ...dispatch,
-  ...ownProps,
-  incrementDisplay: stateProps.operator ? incrementChange : incrementValue,
-});
+const calculatorContainer = Component => {
+  const CalculatorContainer = (props) => {
+    const {
+      operator,
+      incrementChange,
+      incrementValue,
+    } = props;
 
-const calculatorContainer = Component => connect(
-  calculatorSelector,
-  calculatorDispatch,
-  calculatorMergeProps
-)(Component);
+    return (
+      <Component
+        {...props}
+        incrementDisplay={operator ? incrementChange : incrementValue}
+      />
+    );
+  };
+
+  CalculatorContainer.propTypes = {
+    operator: PropTypes.string,
+    incrementValue: PropTypes.func,
+    incrementDisplay: PropTypes.func,
+  };
+
+  return connect(
+    calculatorSelector,
+    calculatorDispatch
+  )(CalculatorContainer);
+};
 
 export default calculatorContainer;
